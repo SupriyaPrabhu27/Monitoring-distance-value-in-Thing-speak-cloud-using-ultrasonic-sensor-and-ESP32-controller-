@@ -1,4 +1,6 @@
-# Monitoring-distance-value-in-Thing-speak-cloud-using-ultrasonic-sensor-and-ESP32-controller
+# SUPRIYA PRABHU
+# 24001111
+# EXPERIMENT 6 Monitoring-distance-value-in-Thing-speak-cloud-using-ultrasonic-sensor-and-ESP32-controller
 
 # Uploading ultrasonic sensor data in Thing Speak cloud
 
@@ -96,8 +98,64 @@ Prototype and build IoT systems without setting up servers or developing web sof
 
  
 # PROGRAM:
+```
+#include "ThingSpeak.h"
+#include <WiFi.h>
+char ssid[] = "NO FREE WIFI"; //SSID
+char pass[] = "0987654321"; // Password
+const int trigger = 25;
+const int echo = 26;
+long T;
+float distanceCM;
+WiFiClient client;
+unsigned long myChannelField = 2729936; // Channel ID
+const int ChannelField = 1; // Which channel to write data
+const char * myWriteAPIKey = "CEPIDT28430O7C66"; // Your write API Key
+void setup()
+{
+Serial.begin(115200);
+pinMode(trigger, OUTPUT);
+pinMode(echo, INPUT);
+WiFi.mode(WIFI_STA);
+ThingSpeak.begin(client);
+}
+void loop()
+{
+if (WiFi.status() != WL_CONNECTED)
+{
+Serial.print("Attempting to connect to SSID: ");
+Serial.println(ssid);
+while (WiFi.status() != WL_CONNECTED)
+{
+WiFi.begin(ssid, pass);
+Serial.print(".");
+delay(5000);
+}
+Serial.println("\nConnected.");
+}
+digitalWrite(trigger, LOW);
+delay(1);
+digitalWrite(trigger, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigger, LOW);
+T = pulseIn(echo, HIGH);
+distanceCM = T * 0.034; //340 m/s or 0.034 cm/microsec
+distanceCM = distanceCM / 2;
+Serial.print("Distance in cm: ");
+Serial.println(distanceCM);
+ThingSpeak.writeField(myChannelField, ChannelField, distanceCM, myWriteAPIKey);
+delay(1000);
+}
+```
 # CIRCUIT DIAGRAM:
+
+![WhatsApp Image 2024-12-24 at 10 36 29](https://github.com/user-attachments/assets/9983b5aa-814c-4e95-beb9-60c24c1cd1e8)
+
 # OUTPUT:
+
+![386927471-8352b11f-d0bd-4cfc-b42b-5fcf11ac8fcd](https://github.com/user-attachments/assets/e5a0806f-9aa0-45d3-bf32-d6e0393a5cb6)
+
 # RESULT:
+
 Thus the distance values are updated in the Thing speak cloud using ESP32 controller.
 
