@@ -1,8 +1,6 @@
-# SUPRIYA PRABHU
-# 24001111
-# EXPERIMENT 6 Monitoring-distance-value-in-Thing-speak-cloud-using-ultrasonic-sensor-and-ESP32-controller
-
-# Uploading ultrasonic sensor data in Thing Speak cloud
+# Name:- SUPRIYA PRABHU
+#  Reg no:-24001111
+# EXPERIMENT 6:- Monitoring distance value in Thing speak cloud using ultrasonic sensor and ESP32 controller
 
 # AIM:
 To monitor the distance of the obstacle in the Thing speak cloud using ultrasonic sensor and ESP32 controller.
